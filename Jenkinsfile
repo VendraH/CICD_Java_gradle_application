@@ -14,6 +14,13 @@ pipeline {
                     sh 'chmod +x gradlew'
                     sh './gradlew sonarqube -Dsonar.projectKey=test -Dsonar.host.url=http://20.198.76.175:9000 -Dsonar.login=sonartoken'
                     }
+                    
+                    timeout(time: 1, unit: 'HOURS') {
+                      def qg = waitForQualityGate()
+                      if (qg.status != 'OK') {
+                           error "Pipeline aborted due to quality gate failure: ${qg.status}"
+                      }
+                    }
                 }
             }
         }
