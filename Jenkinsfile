@@ -11,8 +11,9 @@ pipeline {
             steps {
                 script {
                     withSonarQubeEnv(credentialsId: 'sonartoken') {
-                    sh 'chmod +x gradlew'
-                    sh './gradlew sonarqube -Dsonar.projectKey=test -Dsonar.host.url=http://20.198.76.175:9000 -Dsonar.login=sonartoken'
+                      sh 'sudo su'
+                      sh 'chmod +x gradlew'
+                      sh './gradlew sonarqube'
                     }
                     
                     timeout(time: 1, unit: 'HOURS') {
