@@ -5,7 +5,7 @@ pipeline {
         stage('sonar quality check') {
             agent { 
                 docker {
-                    image 'openjdk:11'
+                    image 'gradle:6.7-jdk11'
                 }
             }
             steps {
